@@ -51,15 +51,14 @@ class PandaGripper(PandaGripperBase):
         Raises:
             AssertionError: [Invalid action dimension size]
         """
-        assert len(action) == self.dof
-        # self.current_action = np.clip(
-        #     self.current_action + np.array([-1.0, 1.0]) * self.speed * np.sign(action), -1.0, 1.0
-        # )
 
+        # print(action, self.speed, self.current_action, np.clip(self.current_action + np.array([-1.0, 1.0]) * self.speed * np.sign(action), -1.0, 1.0))
+
+        assert len(action) == self.dof
         self.current_action = np.clip(
-            self.current_action*0.1 + np.array([-1.0, 1.0]) * np.sign(action), -1.0, 1.0
+            self.current_action + np.array([-1.0, 1.0]) * self.speed * np.sign(action), -1.0, 1.0
         )
-        
+
         return self.current_action
 
     @property
